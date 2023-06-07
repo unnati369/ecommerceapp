@@ -118,8 +118,8 @@ export const ProductContextProvider = ({ children }) => {
       ? productsList?.sort((a, b) => a.price - b.price)
       : productsList?.sort((a, b) => b.price - a.price);
 
-  const productLists = state.sort === null ? productsList : sorted;
-  const productListing = state.search
+  const productLists = state?.sort === null ? productsList : sorted;
+  const productListing = state?.search
     ? productLists?.filter((item) =>
         item.name.toLowerCase().includes(state.search.toLowerCase())
       )
@@ -127,7 +127,7 @@ export const ProductContextProvider = ({ children }) => {
   const productList =
     state.slider === null
       ? productListing
-      : productListing.filter((item) => item.rating <= state.slider);
+      : productListing?.filter((item) => item.rating <= state.slider);
   return (
     <>
       <ProductContext.Provider
