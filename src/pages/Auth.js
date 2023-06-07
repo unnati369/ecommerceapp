@@ -49,32 +49,9 @@ export const Auth = () => {
             Enter valid email and password!
           </p>
         )}
-        <p>OR</p>
-        <span>Log in as Guest User</span>
-//         <NavLink to="/">
-//           <button
-//             style={{ margin: "2% 40%" }}
-//             onClick={() => {
-//               toast("Logged in as guest.");
-//               dispatch({ type: "signIn" });
-//             }}
-//           >
-//             Guest User
-//           </button>
-//         </NavLink>
+
       </fieldset>
-      {/* <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      /> */}
+
     </>
   );
 };
