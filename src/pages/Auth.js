@@ -51,17 +51,17 @@ export const Auth = () => {
         )}
         <p>OR</p>
         <span>Log in as Guest User</span>
-        <NavLink to="/">
-          <button
-            style={{ margin: "2% 40%" }}
-            onClick={() => {
-              toast("Logged in as guest.");
-              dispatch({ type: "signIn" });
-            }}
-          >
-            Guest User
-          </button>
-        </NavLink>
+//         <NavLink to="/">
+//           <button
+//             style={{ margin: "2% 40%" }}
+//             onClick={() => {
+//               toast("Logged in as guest.");
+//               dispatch({ type: "signIn" });
+//             }}
+//           >
+//             Guest User
+//           </button>
+//         </NavLink>
       </fieldset>
       {/* <ToastContainer
         position="top-right"
