@@ -2,12 +2,12 @@ import { useContext } from "react";
 import { ProductContext } from "..";
 import { NavLink } from "react-router-dom";
 export const Wishlist = () => {
-  const { wishlist, dispatch, setWishlist } = useContext(ProductContext);
+  const { dispatch, state } = useContext(ProductContext);
   // console.log(Wishlist);
   return (
     <>
       <h1>MyWishlist</h1>
-      {wishlist.length === 0 ? (
+      {state.wishlist?.length === 0 ? (
         <>
           <p>Wishlist is Empty!</p>
           <NavLink to="/productListing">
@@ -17,7 +17,7 @@ export const Wishlist = () => {
           </NavLink>
         </>
       ) : (
-        <button onClick={() => setWishlist((wishlist) => [])}>
+        <button onClick={() => dispatch({ type: "emptyWishlist" })}>
           Empty Wishlist{" "}
         </button>
       )}
@@ -28,7 +28,7 @@ export const Wishlist = () => {
           flexWrap: "wrap"
         }}
       >
-        {wishlist.map((item) => (
+        {state.wishlist?.map((item) => (
           <div style={{ padding: "3% " }}>
             <li
               key={item.id}
@@ -63,7 +63,7 @@ export const Wishlist = () => {
                   margin: "0.5rem"
                 }}
                 onClick={() =>
-                  dispatch({ type: "removeWishlist", value: item.id })
+                  dispatch({ type: "updateWishlist", value: item })
                 }
               >
                 Remove from Wishlist

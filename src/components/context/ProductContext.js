@@ -5,23 +5,55 @@ import { addresses } from "../AddressData";
 export const ProductContext = createContext();
 
 export const ProductContextProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
-  const [wishlist, setWishlist] = useState([]);
+  // const [cart, setCart] = useState([]);
+  // const [wishlist, setWishlist] = useState([]);
   const ProductReducer = (state, action) => {
     switch (action.type) {
       case "searchProduct": {
         return { ...state, search: action.value };
       }
-
-      case "removeCart": {
-        alert("Removed from Cart");
-        return setCart(cart.filter((item) => item.id !== action.value));
+      case "updateCart": {
+        state.cart?.find((item) => item.id === action.value.id)
+          ? alert("Removed from Cart")
+          : alert("Added to cart");
+        return {
+          ...state,
+          cart: state.cart?.find((item) => item.id === action.value.id)
+            ? state.cart?.filter((item) => item.id !== action.value.id)
+            : [...state.cart, action.value]
+        };
+      }
+      case "updateWishlist": {
+        state.wishlist?.find((item) => item.id === action.value.id)
+          ? alert("Removed from Wishlist")
+          : alert("Added to Wishlist");
+        return {
+          ...state,
+          wishlist: state.wishlist?.find((item) => item.id === action.value.id)
+            ? state.wishlist?.filter((item) => item.id !== action.value.id)
+            : [...state.wishlist, action.value]
+        };
       }
 
-      case "removeWishlist": {
-        alert("Removed from Wishlist");
-        return setWishlist(wishlist.filter((item) => item.id !== action.value));
-      }
+      // case "removeCart": {
+
+      //   // return setCart(cart?.filter((item) => item.id !== action.value.id));
+      //   return {
+      //     ...state,
+      //     cart: state?.cart?.filter((item) => item.id !== action.value?.id)
+      //   };
+      // }
+
+      // case "removeWishlist": {
+      //   // alert("Removed from Wishlist");
+      //   // return setWishlist(
+      //   //   wishlist.filter((item) => item.id !== action.value.id)
+      //   // );
+      //   return {
+      //     ...state,
+      //     cart: state?.wishlist?.filter((item) => item.id !== action.value?.id)
+      //   };
+      // }
       case "categorize": {
         // document.getElementById(action.value).checked = false;
         // document.getElementById(!action.value).checked = false;
@@ -86,6 +118,14 @@ export const ProductContextProvider = ({ children }) => {
         alert("Signed Out");
         return { ...state, signedIn: false };
       }
+      case "emptyCart": {
+        alert("Cart is Empty");
+        return { ...state, cart: [] };
+      }
+      case "emptyWishlist": {
+        alert("Wishlist is empty");
+        return { ...state, wishlist: [] };
+      }
       default: {
         return state;
       }
@@ -104,14 +144,19 @@ export const ProductContextProvider = ({ children }) => {
     slider: null,
     signedIn: false,
     email: "",
-    password: ""
+    password: "",
+    cart: [],
+    wishlist: []
   });
 
   const productsList =
     state?.category === ""
       ? products
       : products?.filter((item) => item?.category === state?.category);
-  const cartPrice = cart?.reduce((accPrice, { price }) => accPrice + price, 0);
+  const cartPrice = state?.cart?.reduce(
+    (accPrice, { price }) => accPrice + price,
+    0
+  );
 
   const sorted =
     state?.sort === "lth"
@@ -125,7 +170,7 @@ export const ProductContextProvider = ({ children }) => {
       )
     : productLists;
   const productList =
-    state.slider === null
+    state?.slider === null
       ? productListing
       : productListing?.filter((item) => item.rating <= state.slider);
   return (
@@ -134,11 +179,9 @@ export const ProductContextProvider = ({ children }) => {
         value={{
           dispatch,
           productList,
-          cart,
-          wishlist,
+
           products,
-          setCart,
-          setWishlist,
+
           cartPrice,
           state
         }}

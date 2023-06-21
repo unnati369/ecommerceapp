@@ -45,13 +45,9 @@ export const Auth = () => {
             </button>{" "}
           </NavLink>
         ) : (
-          <p onClick={() => toast("Create your account")}>
-            Enter valid email and password!
-          </p>
+          <p>Enter valid email and password!</p>
         )}
-
       </fieldset>
-
     </>
   );
 };

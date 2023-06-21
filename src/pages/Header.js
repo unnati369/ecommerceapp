@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { ProductContext } from "..";
-
+import { Navigate } from "react-router";
 export const Header = () => {
-  const { dispatch, cart, wishlist } = useContext(ProductContext);
+  const { dispatch, state, wishlist } = useContext(ProductContext);
   return (
     <>
       <nav style={{ display: "flex" }}>
@@ -29,6 +29,19 @@ export const Header = () => {
             width: "55%"
           }}
         />
+        <NavLink to="/productListing">
+          <button
+            style={{
+              float: "left",
+              height: "40px",
+              margin: "15px"
+              // marginLeft: "50px",
+              // width: "55%"
+            }}
+          >
+            Search
+          </button>
+        </NavLink>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <NavLink to="/cart">
             <img
@@ -37,7 +50,7 @@ export const Header = () => {
               alt="Cart"
             />
           </NavLink>
-          <p style={{ color: "red" }}>({cart.length})</p>
+          <p style={{ color: "red" }}>({state.cart.length})</p>
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <NavLink to="/wishlist">
@@ -49,7 +62,7 @@ export const Header = () => {
               style={{ marginLeft: "15px" }}
             />
           </NavLink>
-          <p style={{ color: "red" }}>({wishlist.length})</p>
+          <p style={{ color: "red" }}>({state.wishlist.length})</p>
         </div>
         <NavLink to="/login">
           {" "}

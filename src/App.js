@@ -21,14 +21,14 @@ export default function App() {
       {/* <Home /> */}
       <Routes>
         <Route path="/" element={<Home />} />
-        {state.signedIn && (
+        {state?.signedIn && (
           <>
             <Route path="/cart" element={<Cart />} />
             <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/address" element={<Address />} />
           </>
         )}
-        {!state.signedIn && (
+        {!state?.signedIn && (
           <>
             <Route path="/cart" element={<Auth />} />
             <Route path="/wishlist" element={<Auth />} />

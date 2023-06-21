@@ -7,7 +7,7 @@ export const OrderSummary = () => {
   const { cartPrice, dispatch, state, cart } = useContext(ProductContext);
 
   return (
-    cart.length > 0 && (
+    state.cart?.length > 0 && (
       <div
         style={{
           border: "1px solid black",

@@ -5,13 +5,13 @@ import { OrderSummary } from "./OrderSummary";
 import { ProductContext } from "..";
 
 export const Cart = () => {
-  const { cart, dispatch, setCart } = useContext(ProductContext);
+  const { dispatch, state } = useContext(ProductContext);
   // console.log(cart);
   return (
     <>
       <h1>MyCart</h1>
       <OrderSummary />
-      {cart.length === 0 ? (
+      {state.cart?.length === 0 ? (
         <>
           <p>Cart is Empty!</p>
           <NavLink to="/productListing">
@@ -22,7 +22,7 @@ export const Cart = () => {
         </>
       ) : (
         <button
-          onClick={() => setCart((cart) => [])}
+          onClick={() => dispatch({ type: "emptyCart" })}
           style={{ margin: "1rem" }}
         >
           Empty Cart
@@ -35,7 +35,7 @@ export const Cart = () => {
           flexWrap: "wrap"
         }}
       >
-        {cart.map((item) => (
+        {state.cart?.map((item) => (
           <div style={{ padding: "3% " }}>
             <li
               key={item.id}
@@ -69,7 +69,7 @@ export const Cart = () => {
                   padding: " 0.2rem",
                   margin: "0.5rem"
                 }}
-                onClick={() => dispatch({ type: "removeCart", value: item.id })}
+                onClick={() => dispatch({ type: "updateCart", value: item })}
               >
                 Remove from Cart
               </button>

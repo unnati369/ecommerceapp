@@ -11,7 +11,8 @@ export const ProductList = () => {
     cart,
     wishlist,
     setCart,
-    setWishlist
+    setWishlist,
+    state
   } = useContext(ProductContext);
 
   // console.log(productList);
@@ -55,7 +56,7 @@ export const ProductList = () => {
 
               <NavLink to={`/${item?.id}`}>View Details </NavLink>
               <br />
-              {cart?.find((prd) => prd?.id === item?.id) ? (
+              {state.cart?.find((prd) => prd?.id === item?.id) ? (
                 <NavLink to="/cart">
                   {" "}
                   <button>Go to Cart</button>
@@ -64,18 +65,19 @@ export const ProductList = () => {
                 <button
                   style={{ width: "50%", alignSelf: "center" }}
                   onClick={() => {
-                    alert("Added to Cart");
-                    setCart([
-                      ...cart,
-                      productList.find((prd) => prd.id === item?.id)
-                    ]);
+                    // alert("Added to Cart");
+                    // setCart([
+                    //   ...cart,
+                    //   productList.find((prd) => prd.id === item?.id)
+                    // ]);
+                    dispatch({ type: "updateCart", value: item });
                   }}
                 >
                   Add to Cart
                 </button>
               )}
 
-              {wishlist?.find((prd) => prd.id === item?.id) ? (
+              {state.wishlist?.find((prd) => prd.id === item?.id) ? (
                 <NavLink to="/wishlist">
                   {" "}
                   <button>Go to Wishlist</button>
@@ -84,11 +86,12 @@ export const ProductList = () => {
                 <button
                   style={{ width: "50%", alignSelf: "center" }}
                   onClick={() => {
-                    alert("Added to Wishlist");
-                    setWishlist([
-                      ...wishlist,
-                      productList.find((prd) => prd.id === item.id)
-                    ]);
+                    // alert("Added to Wishlist");
+                    // setWishlist([
+                    //   ...wishlist,
+                    //   productList.find((prd) => prd.id === item.id)
+                    // ]);
+                    dispatch({ type: "updateWishlist", value: item });
                   }}
                 >
                   Add to Wishlist
