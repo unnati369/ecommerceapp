@@ -17,35 +17,143 @@ export const Auth = () => {
           flexDirection: "column"
         }}
       >
-        <h1>Create Account / Sign In </h1>
-        <label>
-          Enter email :{" "}
-          <input
-            placeholder="xyz@gmail.com"
-            style={{ margin: "3%" }}
-            onChange={() => setMailId(true)}
-          />
-        </label>
-        <label>
-          Enter password :{" "}
-          <input
-            type="password"
-            style={{ margin: "3%" }}
-            onChange={() => setPassword(true)}
-          />
-        </label>
+        <h1>
+          <span
+            onClick={() => dispatch({ type: "account", payload: false })}
+            style={{ color: state.create ? "red" : "black" }}
+          >
+            Create Account{" "}
+          </span>
+          /
+          <span
+            onClick={() => dispatch({ type: "account", payload: true })}
+            style={{ color: !state.create ? "red" : "black" }}
+          >
+            {" "}
+            Sign In
+          </span>{" "}
+        </h1>
+        {!state.create && (
+          <>
+            <label>
+              Enter email :{" "}
+              <input
+                required
+                placeholder="xyz@gmail.com"
+                style={{ margin: "7%" }}
+                onChange={() => setMailId(true)}
+              />
+            </label>
+            <label>
+              Enter password :{" "}
+              <input
+                type={state.hidePassword ? "password" : "text"}
+                style={{ margin: "3%" }}
+                onChange={() => setPassword(true)}
+              />
+              <img
+                src={
+                  state.hidePassword
+                    ? "https://cdn1.iconfinder.com/data/icons/hawcons/32/699007-icon-21-eye-hidden-512.png"
+                    : "https://cdn2.vectorstock.com/i/1000x1000/02/06/eye-icon-on-white-background-vector-27400206.jpg"
+                }
+                alt="show/hide"
+                height="35px"
+                onClick={() => dispatch({ type: "hidePassword" })}
+              />
+            </label>
 
-        {password && mail ? (
-          <NavLink to="/">
-            <button
-              style={{ margin: "2% 40%" }}
-              onClick={() => dispatch({ type: "signIn" })}
-            >
-              Create Account
-            </button>{" "}
-          </NavLink>
-        ) : (
-          <p>Enter valid email and password!</p>
+            {password && mail ? (
+              <NavLink to="/">
+                <button
+                  style={{ margin: "2% 40%" }}
+                  onClick={() => dispatch({ type: "signIn" })}
+                >
+                  Login
+                </button>{" "}
+              </NavLink>
+            ) : (
+              <p>Enter valid email and password!</p>
+            )}
+          </>
+        )}
+        {state.create && (
+          <>
+            <label>Enter email : </label>
+            <input
+              placeholder="xyz@gmail.com"
+              style={{ margin: "3%" }}
+              required
+            />
+
+            <label>Firstname : </label>
+            <input
+              style={{ margin: "3%" }}
+              required
+              // onChange={() => setPassword(true)}
+            />
+
+            <label>Lastname : </label>
+            <input
+              style={{ margin: "3%" }}
+              required
+              // onChange={() => setPassword(true)}
+            />
+
+            <label>Enter password : </label>
+            <input
+              required
+              type="password"
+              style={{ margin: "3%" }}
+              onChange={(e) => {
+                dispatch({
+                  type: "password",
+                  payload: e.target.value
+                });
+                dispatch({ type: "confirm" });
+                console.log("password is" + state.passwords);
+              }}
+            />
+
+            <label>
+              Confirm password :
+              <input
+                required
+                type={state.hidePassword ? "password" : "text"}
+                style={{ margin: "3%" }}
+                onChange={(e) => {
+                  dispatch({
+                    type: "repassword",
+                    payload: e.target.value
+                  });
+                  dispatch({ type: "confirm" });
+                  console.log(state.repassword);
+                }}
+              />
+              <img
+                src={
+                  state.hidePassword
+                    ? "https://cdn1.iconfinder.com/data/icons/hawcons/32/699007-icon-21-eye-hidden-512.png"
+                    : "https://cdn2.vectorstock.com/i/1000x1000/02/06/eye-icon-on-white-background-vector-27400206.jpg"
+                }
+                alt="show/hide"
+                height="35px"
+                onClick={() => dispatch({ type: "hidePassword" })}
+              />{" "}
+            </label>
+            {state.confirm ? (
+              <NavLink to="/">
+                <button
+                  style={{ margin: "2% 40%" }}
+                  onClick={() => dispatch({ type: "signIn" })}
+                >
+                  Create Account
+                </button>{" "}
+              </NavLink>
+            ) : (
+              <p>Password doesn't match!</p>
+            )}
+          </>
         )}
       </fieldset>
     </>

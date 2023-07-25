@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { ProductContext } from "..";
 
 export const OrderSummary = () => {
-  const { cartPrice, dispatch, state, cart } = useContext(ProductContext);
+  const { cartPrice, dispatch, state, loader } = useContext(ProductContext);
 
   return (
     state.cart?.length > 0 && (
@@ -12,8 +12,8 @@ export const OrderSummary = () => {
         style={{
           border: "1px solid black",
           textAlign: "center",
-          marginLeft: "40%",
-          marginRight: "40%",
+          marginLeft: "20%",
+          marginRight: "20%",
           padding: "1 5 1 5rem",
           backgroundColor: "lightgray",
           display: "flex",
@@ -23,9 +23,17 @@ export const OrderSummary = () => {
         }}
       >
         <h2>Order Summary</h2>
-        <button id="myBtn" onClick={() => dispatch({ type: "discount" })}>
-          Apply Coupon
-        </button>
+        {/* <p>
+          <span>Item name</span> <span>Qty</span>
+        </p> */}
+        <p>
+          {state.cart?.map((item) => (
+            <ul>
+              <li>{`Product Name :- ${item.name}`}</li>
+              <p>{`Quantity :- ${item.quantity}`}</p>
+            </ul>
+          ))}
+        </p>
         <p style={{ textDecoration: state?.isDiscount ? "line-through" : "" }}>
           <b>Total Cart Price : </b>${cartPrice}
         </p>
@@ -34,8 +42,14 @@ export const OrderSummary = () => {
             <b>{`Discounted Price : $ ${cartPrice - 20}`}</b>
           </p>
         )}
+        <button id="myBtn" onClick={() => dispatch({ type: "discount" })}>
+          Apply Coupon
+        </button>
         <NavLink to="/address">
-          <button style={{ backgroundColor: "lightblue", margin: "1rem" }}>
+          <button
+            style={{ backgroundColor: "lightblue", margin: "1rem" }}
+            onClick={() => loader()}
+          >
             Checkout
           </button>
         </NavLink>

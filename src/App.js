@@ -1,7 +1,8 @@
 import "./styles.css";
 import { Routes, Route } from "react-router-dom";
 import { ProductContext } from "..";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Home } from "./pages/Home";
 import { Header } from "./pages/Header";
 import { Cart } from "./pages/Cart";
@@ -12,6 +13,8 @@ import { About } from "./pages/About";
 import { Address } from "./components/Address";
 import { useContext } from "react";
 import { UserProfile } from "./pages/UserProfile";
+import { Checkout } from "./components/Checkout";
+import { NewAddress } from "./components/NewAddress";
 export default function App() {
   // const isLoggedIn = false;
   const { state } = useContext(ProductContext);
@@ -25,7 +28,6 @@ export default function App() {
           <>
             <Route path="/cart" element={<Cart />} />
             <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/address" element={<Address />} />
           </>
         )}
         {!state?.signedIn && (
@@ -38,7 +40,24 @@ export default function App() {
         <Route path="/login" element={<UserProfile />} />
         <Route path="/productListing" element={<ProductList />} />
         <Route path="/:productId" element={<About />} />
+        <Route path="/address" element={<Address />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/addAddress" element={<NewAddress />} />
       </Routes>
+
+      <ToastContainer
+        // limit={1}
+
+        position="top-right"
+        autoClose={400}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }

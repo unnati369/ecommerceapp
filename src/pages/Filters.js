@@ -74,7 +74,11 @@ export const Filters = () => {
       <br />
       <label>
         Reset
-        <input type="radio" onChange={() => dispatch({ type: "all" })} />
+        <input
+          type="radio"
+          id="reset"
+          onClick={() => dispatch({ type: "all" })}
+        />
       </label>
     </>
   );

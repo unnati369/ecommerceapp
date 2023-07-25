@@ -4,7 +4,7 @@ import { ProductContext } from "..";
 
 export const About = () => {
   const { productId } = useParams();
-  const { productList, cart, wishlist, setCart, setWishlist } = useContext(
+  const { productList, state, wishlist, dispatch, setWishlist } = useContext(
     ProductContext
   );
   const detailedPrd = productList?.find(
@@ -31,7 +31,7 @@ export const About = () => {
             flexDirection: "column"
           }}
         >
-          {cart?.find((prd) => prd?.id === detailedPrd?.id) ? (
+          {state.cart?.find((prd) => prd?.id === detailedPrd?.id) ? (
             <NavLink to="/cart">
               {" "}
               <button
@@ -54,16 +54,13 @@ export const About = () => {
                 margin: "0.5rem"
               }}
               onClick={() =>
-                setCart([
-                  ...cart,
-                  productList?.find((prd) => prd?.id === detailedPrd?.id)
-                ])
+                dispatch({ type: "updateCart", value: detailedPrd })
               }
             >
               Add to Cart
             </button>
           )}
-          {wishlist?.find((prd) => prd?.id === detailedPrd?.id) ? (
+          {state.wishlist?.find((prd) => prd?.id === detailedPrd?.id) ? (
             <NavLink to="/wishlist">
               {" "}
               <button
@@ -86,10 +83,7 @@ export const About = () => {
                 margin: "0.5rem"
               }}
               onClick={() =>
-                setWishlist([
-                  ...wishlist,
-                  productList?.find((prd) => prd?.id === detailedPrd?.id)
-                ])
+                dispatch({ type: "updateWishlist", value: detailedPrd })
               }
             >
               Add to Wishlist
