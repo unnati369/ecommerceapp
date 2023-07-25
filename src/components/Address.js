@@ -81,16 +81,28 @@ export const Address = () => {
                 style={{
                   border: "1px solid",
                   padding: "1%",
-                  margin: "2% 40%",
+                  margin: "2% 33%",
                   backgroundColor:
                     state.address.id === add.id ? "lightpink" : ""
                 }}
               >
                 {Options(add)}
                 {add.updateAdd && (
-                  <div>
+                  <div
+                    style={{
+                      border: "1px solid grey",
+                      backgroundColor: "lightgray"
+                    }}
+                  >
                     <h4>Edit address</h4>
-                    <form onSubmit={handleSubmit}>
+                    <form
+                      onSubmit={handleSubmit}
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center"
+                      }}
+                    >
                       {/* <h2>Add an address</h2> */}
 
                       <label>Street : </label>

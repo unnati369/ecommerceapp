@@ -15,6 +15,7 @@ import { useContext } from "react";
 import { UserProfile } from "./pages/UserProfile";
 import { Checkout } from "./components/Checkout";
 import { NewAddress } from "./components/NewAddress";
+import { RequiresAuth } from "./components/RequiresAuth";
 export default function App() {
   // const isLoggedIn = false;
   const { state } = useContext(ProductContext);
@@ -24,19 +25,24 @@ export default function App() {
       {/* <Home /> */}
       <Routes>
         <Route path="/" element={<Home />} />
-        {state?.signedIn && (
-          <>
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/wishlist" element={<Wishlist />} />
-          </>
-        )}
-        {!state?.signedIn && (
-          <>
-            <Route path="/cart" element={<Auth />} />
-            <Route path="/wishlist" element={<Auth />} />
-            <Route path="/address" element={<Auth />} />
-          </>
-        )}
+
+        <Route
+          path="/cart"
+          element={
+            <RequiresAuth>
+              <Cart />
+            </RequiresAuth>
+          }
+        />
+        <Route
+          path="/wishlist"
+          element={
+            <RequiresAuth>
+              <Wishlist />
+            </RequiresAuth>
+          }
+        />
+        <Route path="/address" element={<Address />} />
         <Route path="/login" element={<UserProfile />} />
         <Route path="/productListing" element={<ProductList />} />
         <Route path="/:productId" element={<About />} />

@@ -4,11 +4,13 @@ import React from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { addresses } from "../AddressData";
+import { useLocation, useNavigate } from "react-router";
 export const ProductContext = createContext();
 
 export const ProductContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
+  const location = useLocation();
   // useEffect(() => {
   //   setLoading(true);
   //   setTimeout(() => {
@@ -161,6 +163,7 @@ export const ProductContextProvider = ({ children }) => {
       }
       case "signIn": {
         toast("Signed In");
+        navigate(location?.state?.from?.pathname);
         return { ...state, signedIn: true };
       }
       case "signOut": {

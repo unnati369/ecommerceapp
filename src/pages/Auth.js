@@ -64,57 +64,60 @@ export const Auth = () => {
             </label>
 
             {password && mail ? (
-              <NavLink to="/">
-                <button
-                  style={{ margin: "2% 40%" }}
-                  onClick={() => dispatch({ type: "signIn" })}
-                >
-                  Login
-                </button>{" "}
-              </NavLink>
+              <button
+                style={{ margin: "2% 40%" }}
+                onClick={() => dispatch({ type: "signIn" })}
+              >
+                Login
+              </button>
             ) : (
               <p>Enter valid email and password!</p>
             )}
           </>
         )}
         {state.create && (
-          <>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignSelf: "center"
+            }}
+          >
             <label>Enter email : </label>
             <input
               placeholder="xyz@gmail.com"
               style={{ margin: "3%" }}
               required
             />
-
             <label>Firstname : </label>
             <input
               style={{ margin: "3%" }}
               required
               // onChange={() => setPassword(true)}
             />
-
             <label>Lastname : </label>
             <input
               style={{ margin: "3%" }}
               required
               // onChange={() => setPassword(true)}
             />
-
-            <label>Enter password : </label>
-            <input
-              required
-              type="password"
-              style={{ margin: "3%" }}
-              onChange={(e) => {
-                dispatch({
-                  type: "password",
-                  payload: e.target.value
-                });
-                dispatch({ type: "confirm" });
-                console.log("password is" + state.passwords);
-              }}
-            />
-
+            <label>
+              Enter password :
+              <input
+                required
+                type={state.hidePassword ? "password" : "text"}
+                style={{ margin: "3%" }}
+                onChange={(e) => {
+                  dispatch({
+                    type: "password",
+                    payload: e.target.value
+                  });
+                  dispatch({ type: "confirm" });
+                  console.log("password is" + state.passwords);
+                }}
+              />{" "}
+            </label>
             <label>
               Confirm password :
               <input
@@ -140,20 +143,18 @@ export const Auth = () => {
                 height="35px"
                 onClick={() => dispatch({ type: "hidePassword" })}
               />{" "}
-            </label>
+            </label>{" "}
             {state.confirm ? (
-              <NavLink to="/">
-                <button
-                  style={{ margin: "2% 40%" }}
-                  onClick={() => dispatch({ type: "signIn" })}
-                >
-                  Create Account
-                </button>{" "}
-              </NavLink>
+              <button
+                style={{ margin: "2% 40%" }}
+                onClick={() => dispatch({ type: "signIn" })}
+              >
+                Create Account
+              </button>
             ) : (
               <p>Password doesn't match!</p>
             )}
-          </>
+          </div>
         )}
       </fieldset>
     </>
