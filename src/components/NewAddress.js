@@ -16,11 +16,21 @@ export const NewAddress = () => {
           src="https://static.vecteezy.com/system/resources/previews/000/589/654/original/vector-back-icon.jpg"
           height="30px"
           alt="back"
+          style={{ marginRight: "70%" }}
         />
       </NavLink>
       <div>
         <h4>Add address</h4>
-        <form onSubmit={handleSubmit}>
+        <form
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            width: "30%",
+            alignItems: "center",
+            margin: "1% 35%"
+          }}
+          onSubmit={handleSubmit}
+        >
           {/* <h2>Add an address</h2> */}
 
           <label>Street : </label>
@@ -53,7 +63,10 @@ export const NewAddress = () => {
               dispatch({ type: "addPin", payload: e.target.value })
             }
           />
-          <button onClick={() => dispatch({ type: "addAddress" })}>
+          <button
+            style={{ padding: "2%", margin: "5%" }}
+            onClick={() => dispatch({ type: "addAddress" })}
+          >
             Add adress
           </button>
         </form>

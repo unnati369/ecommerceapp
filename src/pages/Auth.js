@@ -40,7 +40,7 @@ export const Auth = () => {
               <input
                 required
                 placeholder="xyz@gmail.com"
-                style={{ margin: "7%" }}
+                style={{ margin: "2%" }}
                 onChange={() => setMailId(true)}
               />
             </label>
@@ -84,24 +84,30 @@ export const Auth = () => {
               alignSelf: "center"
             }}
           >
-            <label>Enter email : </label>
-            <input
-              placeholder="xyz@gmail.com"
-              style={{ margin: "3%" }}
-              required
-            />
-            <label>Firstname : </label>
-            <input
-              style={{ margin: "3%" }}
-              required
-              // onChange={() => setPassword(true)}
-            />
-            <label>Lastname : </label>
-            <input
-              style={{ margin: "3%" }}
-              required
-              // onChange={() => setPassword(true)}
-            />
+            <label>
+              Enter email :
+              <input
+                placeholder="xyz@gmail.com"
+                style={{ margin: "3%" }}
+                required
+              />
+            </label>
+            <label>
+              Firstname :
+              <input
+                style={{ margin: "3%" }}
+                required
+                // onChange={() => setPassword(true)}
+              />
+            </label>
+            <label>
+              Lastname :
+              <input
+                style={{ margin: "3%" }}
+                required
+                // onChange={() => setPassword(true)}
+              />{" "}
+            </label>
             <label>
               Enter password :
               <input
@@ -146,7 +152,7 @@ export const Auth = () => {
             </label>{" "}
             {state.confirm ? (
               <button
-                style={{ margin: "2% 40%" }}
+                style={{ margin: "2% 35%" }}
                 onClick={() => dispatch({ type: "signIn" })}
               >
                 Create Account

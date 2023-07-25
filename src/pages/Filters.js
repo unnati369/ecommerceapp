@@ -77,7 +77,14 @@ export const Filters = () => {
         <input
           type="radio"
           id="reset"
-          onClick={() => dispatch({ type: "all" })}
+          onClick={() => {
+            dispatch({ type: "all" });
+            document.getElementById("Electronics").checked = false;
+            document.getElementById("Home & Kitchen").checked = false;
+            document.getElementById("Fashion").checked = false;
+            document.getElementById("lth").checked = false;
+            document.getElementById("htl").checked = false;
+          }}
         />
       </label>
     </>

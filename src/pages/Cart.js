@@ -87,7 +87,7 @@ export const Cart = () => {
                     >
                       +
                     </button>
-                    {item.quantity}
+                    <span style={{ margin: "1%" }}> {item.quantity}</span>
                     <button
                       value="subtract"
                       onClick={(e) => {

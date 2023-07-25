@@ -42,7 +42,11 @@ export const OrderSummary = () => {
             <b>{`Discounted Price : $ ${cartPrice - 20}`}</b>
           </p>
         )}
-        <button id="myBtn" onClick={() => dispatch({ type: "discount" })}>
+        <button
+          style={{ width: "30%", alignSelf: "center" }}
+          id="myBtn"
+          onClick={() => dispatch({ type: "discount" })}
+        >
           Apply Coupon
         </button>
         <NavLink to="/address">

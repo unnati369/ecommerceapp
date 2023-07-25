@@ -81,10 +81,14 @@ export const ProductList = () => {
                     </button>
                   )}
                   {state.wishlist?.find((prd) => prd.id === item?.id) ? (
-                    <NavLink to="/wishlist">
-                      {" "}
-                      <button>Go to Wishlist</button>
-                    </NavLink>
+                    <button
+                      style={{ width: "50%", alignSelf: "center" }}
+                      onClick={() =>
+                        dispatch({ type: "updateWishlist", value: item })
+                      }
+                    >
+                      Remove from Wishlist
+                    </button>
                   ) : (
                     <button
                       style={{ width: "50%", alignSelf: "center" }}

@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { OrderSummary } from "../pages/OrderSummary";
 
 export const Checkout = () => {
-  const { cartPrice, state, loading, loader } = useContext(ProductContext);
+  const { cartPrice, state, loading } = useContext(ProductContext);
   console.log(state.address);
   return (
     <>

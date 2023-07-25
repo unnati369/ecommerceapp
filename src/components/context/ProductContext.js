@@ -5,18 +5,14 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { addresses } from "../AddressData";
 import { useLocation, useNavigate } from "react-router";
+import { v4 as uuid } from "uuid";
 export const ProductContext = createContext();
 
 export const ProductContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  // useEffect(() => {
-  //   setLoading(true);
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 2000);
-  // }, []);
+
   const loader = () => {
     setLoading(true);
     setTimeout(() => {
@@ -53,8 +49,6 @@ export const ProductContextProvider = ({ children }) => {
         };
       }
       case "updateItemQty": {
-        // console.log(action.payload);
-        // console.log(action.payload.type);
         return {
           ...state,
           cart:
@@ -102,11 +96,6 @@ export const ProductContextProvider = ({ children }) => {
         };
       }
       case "all": {
-        // document.getElementById("Electronics").checked = false;
-        // document.getElementById("Home & Kitchen").checked = false;
-        // document.getElementById("Fashion").checked = false;
-        // document.getElementById("lth").checked = false;
-        // document.getElementById("htl").checked = false;
         return {
           ...state,
           category: "",
@@ -231,9 +220,13 @@ export const ProductContextProvider = ({ children }) => {
         };
       }
       case "addAddress": {
+        toast("Address added");
         return {
           ...state,
-          allAdresses: [...state.allAdresses, state.newAddress],
+          allAdresses: [
+            ...state.allAdresses,
+            { ...state.newAddress, id: uuid() }
+          ],
           address: state.newAddress
         };
       }
@@ -298,7 +291,7 @@ export const ProductContextProvider = ({ children }) => {
     confirm: false,
     allAdresses: addresses,
     hidePassword: true,
-    newAddress: { id: Math.floor(Math.random() * 200 + 100) }
+    newAddress: {}
   });
 
   const productsList =
